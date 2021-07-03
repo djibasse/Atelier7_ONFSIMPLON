@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EvaluationController!{% endblock %}
+{% block title %}Evaluation index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Evaluation index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Discipline</th>
+                <th>NoteApprenant</th>
+                <th>DateEvaluation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluation in evaluations %}
+            <tr>
+                <td>{{ evaluation.id }}</td>
+                <td>{{ evaluation.categorie }}</td>
+                <td>{{ evaluation.discipline }}</td>
+                <td>{{ evaluation.noteApprenant }}</td>
+                <td>{{ evaluation.dateEvaluation ? evaluation.dateEvaluation|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('evaluation_show', {'id': evaluation.id}) }}">Consulter</a>
+                    <a href="{{ path('evaluation_edit', {'id': evaluation.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas d'Evalution</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/HP/Desktop/YF/Atelier7/Atelier7_ONFSIMPLON/src/Controller/EvaluationController.php'|file_link(0) }}">src/Controller/EvaluationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/HP/Desktop/YF/Atelier7/Atelier7_ONFSIMPLON/templates/evaluation/index.html.twig'|file_link(0) }}">templates/evaluation/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('evaluation_new') }}">Entrer une Evaluation</a>
 {% endblock %}
