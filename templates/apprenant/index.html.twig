@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ApprenantController!{% endblock %}
+
+{% block title %}Apprenant index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Apprenant index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>DateNaissance</th>
+                <th>LieuNaissance</th>
+                <th>Sexe</th>
+                <th>NiveauEtude</th>
+                <th>Attentes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for apprenant in apprenants %}
+            <tr>
+                <td>{{ apprenant.id }}</td>
+                <td>{{ apprenant.nom }}</td>
+                <td>{{ apprenant.prenom }}</td>
+                <td>{{ apprenant.adresse }}</td>
+                <td>{{ apprenant.telephone }}</td>
+                <td>{{ apprenant.email }}</td>
+                <td>{{ apprenant.dateNaissance ? apprenant.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ apprenant.lieuNaissance }}</td>
+                <td>{{ apprenant.sexe }}</td>
+                <td>{{ apprenant.niveauEtude }}</td>
+                <td>{{ apprenant.attentes }}</td>
+                <td>
+                    <a href="{{ path('apprenant_show', {'id': apprenant.id}) }}">show</a>
+                    <a href="{{ path('apprenant_edit', {'id': apprenant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/HP/Desktop/YF/Atelier7/Atelier7_ONFSIMPLON/src/Controller/ApprenantController.php'|file_link(0) }}">src/Controller/ApprenantController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/HP/Desktop/YF/Atelier7/Atelier7_ONFSIMPLON/templates/apprenant/index.html.twig'|file_link(0) }}">templates/apprenant/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('apprenant_new') }}">Create new</a>
 {% endblock %}
