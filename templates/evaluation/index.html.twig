@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evaluation{% endblock %}
+
+{% block body %}
+    <h1>Evaluation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie</th>
+                <th>Discipline</th>
+                <th>NoteApprenant</th>
+                <th>DateEvaluation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluation in evaluations %}
+            <tr>
+                <td>{{ evaluation.id }}</td>
+                <td>{{ evaluation.categorie }}</td>
+                <td>{{ evaluation.discipline }}</td>
+                <td>{{ evaluation.noteApprenant }}</td>
+                <td>{{ evaluation.dateEvaluation ? evaluation.dateEvaluation|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('evaluation_show', {'id': evaluation.id}) }}">Consulter</a>
+                    <a href="{{ path('evaluation_edit', {'id': evaluation.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Pas d'Evaluation</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('evaluation_new') }}">Entrer une Evaluation</a>
+{% endblock %}
