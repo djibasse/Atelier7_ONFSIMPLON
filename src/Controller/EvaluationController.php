@@ -80,10 +80,4 @@ class EvaluationController extends AbstractController
         return $this->redirectToRoute('evaluation_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     *@Route('/acceuil', name="acceuil")
-     */
-    public function acceuil(){
-        return $this->render('evalaluation/acceuil.html.twig');
-    }
 }
